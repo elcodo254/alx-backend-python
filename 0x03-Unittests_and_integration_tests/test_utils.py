@@ -5,9 +5,9 @@ Test SUITE Unittest module Task
 
 import unittest
 from unittest.mock import patch, Mock
-from parameterized import parameterized, memoize
+from parameterized import parameterized
 
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -59,7 +59,7 @@ class TestGetJson(unittest.TestCase):
             mock_response.json.assert_called_once()
 
 
-class TestMemoize(TestCase):
+class TestMemoize(unittest.TestCase):
     """ Class for testing memoization """
 
     def test_memoize(self):
