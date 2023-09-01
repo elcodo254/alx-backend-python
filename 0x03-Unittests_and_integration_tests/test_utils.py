@@ -5,7 +5,7 @@ Test SUITE Unittest module Task
 
 import unittest
 from unittest.mock import patch, Mock
-from parameterized import parameterized
+from parameterized import parameterized, memoize
 
 from utils import access_nested_map, get_json
 
@@ -57,3 +57,30 @@ class TestGetJson(unittest.TestCase):
             self.assertEqual(real_response, test_payload)
             # check that mocked method called once per input
             mock_response.json.assert_called_once()
+
+
+class TestMemoize(TestCase):
+    """ Class for testing memoization """
+
+    def test_memoize(self):
+        """ Tests memoize function """
+
+        class TestClass:
+            """ Test class """
+
+            def a_method(self):
+                """ Method to always return 42 """
+                return 42
+
+            @memoize
+            def a_property(self):
+                """ Returns memoized property """
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method', return_value=42) as patched:
+            test_class = TestClass()
+            real_return = test_class.a_property
+            real_return = test_class.a_property
+
+            self.assertEqual(real_return, 42)
+            patched.assert_called_once()
