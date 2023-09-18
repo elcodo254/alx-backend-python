@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Define and annotate the following variables with the specified values
     Arguments:  a - integer with value 1
